@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Map - Golf Courses</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+      #searchBar {
+      	z-index: ;
+      }
+    </style>
+  </head>
+  <body>
+  	<form id="searchBar">
+    	Search Locations:
+    	<input type="search">
+    	<input type="submit">
+    </form>
+
+    <!--<ul>
+    	<li>Temeku Hills</li>
+    	<li>Golf Course at Rancho California</li>
+    	<li>Temecula Creek Inn</li>
+    </ul>-->
+    <div id="points" data-bind="template: { name: 'pointsTmpl', foreach: points }"></div>
+      <script id="pointsTmpl" type="text/html">
+        <p>
+          Name: <span data-bind="text: name"></span>
+          Lat: <span data-bind="text: lat"></span>
+          Lng: <span data-bind="text: lng"></span>
+        </p>
+      </script>
+    </div>
+
+
+    <div id="map"></div>
+
+    <!--<script>
+
+// var marker;
+// var marker0;
+// var map;
+// function initMap() {
+//   map = new google.maps.Map(document.getElementById('map'), {
+//     center: {lat: 33.493, lng: -117.148},
+//     zoom: 12
+//   });
+
+//   marker = new google.maps.Marker({
+// 	map: map,
+// 	position: {lat: 33.493, lng: -117.148},
+// 	title: 'Sup!'
+//   });
+
+//   var string = 'Sup';
+
+//   var infowindow = new google.maps.InfoWindow({
+//   	content: string
+//   });
+
+//   marker.addListener('click', toggleBounce);
+//   marker.addListener('click', function () {
+//   	infowindow.open(map, marker);
+//   });
+// }
+
+// function toggleBounce () {
+// 	if (marker.getAnimation() !== null) {
+// 		marker.setAnimation(null);
+// 	} else {
+// 		marker.setAnimation(google.maps.Animation.BOUNCE);
+// 	}
+// }
+
+//     </script>-->
+    <script async src="http://maps.google.com/maps/api/js?sensor=false&.js"></script>
+    <script src="bower_components/knockout/dist/knockout.js"></script>
+    <script src="js/app.js"></script>
+
+    <script src="http://localhost:9090/livereload.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFHQyc_gackAhFxbEptFn6JnSeHNfs4Og&callback=initMap"
+         async defer></script>-->
+
+  </body>
+</html>
+
+
+
