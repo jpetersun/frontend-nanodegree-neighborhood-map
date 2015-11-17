@@ -205,33 +205,33 @@ function toggleBounce() {
 //         new Pin(map, 'The Legends Golf Club', 33.515210, -117.113069, 5)
 // ];
 
-var pinZ = [
-{
-  "name": "Journey At Pechanga",
-  "lat": 33.453159,
-  'lng': -117.106527
-},
-{
-  "name": "Temecula Creek Inn",
-  "lat": 33.4676068,
-  'lng': -117.1291816
-},
-{
-  "name": "The Golf Club at Rancho California",
-  "lat": 33.562563,
-  "lng": -117.145126
-},
-{
-  "name": "Redhawk Golf Club",
-  "lat": 33.468955,
-  "lng": -117.091304
-},
-{
-  "name": "The Legends Golf Club",
-  "lat": 33.515210,
-  "lng": -117.113069
-}
-];
+// var pinZ = [
+// {
+//   "name": "Journey At Pechanga",
+//   "lat": 33.453159,
+//   'lng': -117.106527
+// },
+// {
+//   "name": "Temecula Creek Inn",
+//   "lat": 33.4676068,
+//   'lng': -117.1291816
+// },
+// {
+//   "name": "The Golf Club at Rancho California",
+//   "lat": 33.562563,
+//   "lng": -117.145126
+// },
+// {
+//   "name": "Redhawk Golf Club",
+//   "lat": 33.468955,
+//   "lng": -117.091304
+// },
+// {
+//   "name": "The Legends Golf Club",
+//   "lat": 33.515210,
+//   "lng": -117.113069
+// }
+// ];
 
 var ViewModel = function() {
 	var self = this;
