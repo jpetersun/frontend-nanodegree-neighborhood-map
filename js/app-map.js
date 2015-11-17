@@ -60,7 +60,7 @@ var map;
 
 
 var markers = [];
-var myListener;
+
 var infowindow = new google.maps.InfoWindow();
 function Pin(map, name, lat, lng, id) {
   var marker;
