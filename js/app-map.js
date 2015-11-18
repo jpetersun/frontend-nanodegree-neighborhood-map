@@ -54,6 +54,7 @@
 var map;
 	 map = new google.maps.Map(document.getElementById('map'), {
 	    center: new google.maps.LatLng(33.480, -117.160),
+      //center: new google.maps.LatLng(0, 0),
 	    zoom: 12,
 	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
@@ -71,15 +72,20 @@ function Pin(map, name, lat, lng, id) {
   this.id   = ko.observable(id);
   this.marker = ko.observable(marker);
 
+  var LatLng = new google.maps.LatLng(lat, lng);
+  var bounds = new google.maps.LatLngBounds();
 
   marker = new google.maps.Marker({
-    position: new google.maps.LatLng(lat, lng),
+    position: LatLng,
+    //position: new google.maps.LatLng(lat, lng),
     animation: google.maps.Animation.DROP,
     title: name,
-    //icon: 'images/golfer.png',
+    icon: 'images/blue-dot.png',
     map: map,
     id: id
   });
+
+  bounds.extend(LatLng);
 
   marker.addListener('click', toggleBounce);
 
@@ -128,6 +134,10 @@ function nonce_generate() {
         var contentString = '<a href=' + data.businesses[0].url + '>' + data.businesses[0].name + '</a>' + imago + data.businesses[0].image_url + sauce + '<br>' + imago + data.businesses[0].rating_img_url + sauce + data.businesses[0].review_count + ' reviews <br>';
 
       google.maps.event.addListener(marker, 'click', function() {
+       for (var i = 0; i < markers.length; i++) {
+         markers[i].setIcon('images/blue-dot.png');
+       }
+      this.setIcon('images/golfer.png');
       infowindow.setContent(contentString);
       infowindow.open(map, marker);
     });
@@ -135,7 +145,9 @@ function nonce_generate() {
       },
       error: function() {
         // Do stuff on fail
-        console.log('not noice');
+        var contentString = "<h1>Couldn't load Yelp API results</h1>";
+        infowindow.setContent(contentString);
+        infowindow.open(map, marker)
       }
     };
 
@@ -156,6 +168,7 @@ function nonce_generate() {
 
     markers.push(marker);
     console.log(markers);
+    //map.fitBounds(bounds);
 }
 
     // listClick = function() {
