@@ -1,0 +1,60 @@
+input {
+    width: 33.33%;
+    padding: 5px;
+    margin: 10px;
+    height: 25px;
+    background-image: url('/images/magnifier12.png');
+    background-size:  18px 18px;
+    background-repeat: no-repeat;
+    background-position: right 5px bottom 1px;
+    border-radius: 5px;
+}
+
+.marker-list {
+	width: 450px;
+}
+.navbar {
+    margin-bottom: 0;
+}
+
+.gm-style-iw div {
+ overflow:hidden !important;
+}
+
+.yelp-img {
+    padding-left: 2px;
+}
+
+
+/*ul {
+    white-space: nowrap;
+}*/
+#list {
+    min-width: 255px;
+    min-height: 350px;
+}
+li {
+    color: #337ab7;
+    line-height: 2;
+    padding-left: 15px;
+}
+html, body {
+    font-size: 14px;
+	height: 100%;
+	margin: 0;
+	padding-top: 0px;
+}
+
+}
+@media screen and (max-width: 767px) {
+    #listed-items > ul { display: none; }
+    input { width: 50%; }
+
+    /*body { padding-top: 0px; }*/
+}
+
+#map {
+	height: 100%;
+}
+
+/*<div>Icons made by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>*/
