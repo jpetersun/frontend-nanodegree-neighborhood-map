@@ -8,6 +8,7 @@ input {
     background-repeat: no-repeat;
     background-position: right 5px bottom 1px;
     border-radius: 5px;
+
 }
 
 .marker-list {
@@ -31,7 +32,6 @@ input {
 }*/
 #list {
     min-width: 255px;
-    min-height: 350px;
 }
 li {
     color: #337ab7;
@@ -47,7 +47,6 @@ html, body {
 
 }
 @media screen and (max-width: 767px) {
-    #listed-items > ul { display: none; }
     input { width: 50%; }
 
     /*body { padding-top: 0px; }*/
