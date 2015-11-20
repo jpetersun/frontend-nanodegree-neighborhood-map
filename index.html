@@ -2,29 +2,31 @@
 <html>
   <head>
     <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #map {
-        height: 100%;
-      }
-    </style>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <form>
-      <input data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" type="text" placeholder="Search Golf Courses">
-    </form>
 
-          <ul data-bind="foreach: filterPins">
-              <li data-bind="text: name, click: listClick($data.id())"></li>
-          </ul>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">California Golf Courses</a>
+        </div>
+        <form>
+          <input data-bind="value: query, valueUpdate: 'keyup'" autocomplete="off" type="text" placeholder="Search">
+        </form>
+      </div>
+    </nav>
+
+    <div id="list" class="col-sm-3 col-md-2 sidebar text-nowrap">
+      <ul id="listed-items" class="nav nav-sidebar " data-bind="foreach: filterPins">
+        <li data-bind="text: name, click: listClick($data.id())"></li>
+      </ul>
+    </div>
     <div id="map"></div>
-      <!--<script src="http://maps.google.com/maps/api/js?.js"></script>-->
+
         <script src="http://maps.google.com/maps/api/js?.js"></script>
         <script src="bower_components/oauth-signature/dist/oauth-signature.js"></script>
         <script src="bower_components/knockout/dist/knockout.js"></script>

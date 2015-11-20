@@ -50,19 +50,29 @@
 
 //     // Send AJAX query via jQuery library.
 //     $.ajax(settings);
+var styles = [
+  {
+    "stylers": [
+      { "hue": "#4cff00" },
+      { "saturation": 3 },
+      { "gamma": 0.5 }
+    ]
+  }
+];
+
 
 var map;
 	 map = new google.maps.Map(document.getElementById('map'), {
-	    center: new google.maps.LatLng(33.480, -117.160),
-      //center: new google.maps.LatLng(0, 0),
-	    zoom: 12,
+	    center: new google.maps.LatLng(0, 0),
+	    //zoom: 11,
 	    mapTypeId: google.maps.MapTypeId.ROADMAP
 	});
 
 
 var markers = [];
-
+var bounds = new google.maps.LatLngBounds();
 var infowindow = new google.maps.InfoWindow();
+
 function Pin(map, name, lat, lng, id) {
   var marker;
 
@@ -73,16 +83,15 @@ function Pin(map, name, lat, lng, id) {
   this.marker = ko.observable(marker);
 
   var LatLng = new google.maps.LatLng(lat, lng);
-  var bounds = new google.maps.LatLngBounds();
+
 
   marker = new google.maps.Marker({
     position: LatLng,
     //position: new google.maps.LatLng(lat, lng),
     animation: google.maps.Animation.DROP,
     title: name,
-    icon: 'images/blue-dot.png',
-    map: map,
-    id: id
+    icon: 'images/golf.png',
+    map: map
   });
 
   bounds.extend(LatLng);
@@ -127,21 +136,23 @@ function nonce_generate() {
       dataType: 'jsonp',
       success: function(data) {
         console.log(data);
-        var imago = '<img src=';
-        var sauce = '>';
-        var link = '<a href=';
-        var linku = '>';
-        var contentString = '<a href=' + data.businesses[0].url + '>' + data.businesses[0].name + '</a>' + imago + data.businesses[0].image_url + sauce + '<br>' + imago + data.businesses[0].rating_img_url + sauce + data.businesses[0].review_count + ' reviews <br>';
+
+        var contentString = '<div style="float:left; width:60%;">' +  '<a href=' + data.businesses[0].url + '>'
+        + data.businesses[0].name + '</a><br>' + '<img src="' + data.businesses[0].rating_img_url + '"/>' + ' '
+        + data.businesses[0].review_count + ' reviews<br><br>' + data.businesses[0].location.address + '<br>'
+        + data.businesses[0].location.city + ', ' + data.businesses[0].location.state_code + ' '
+        + data.businesses[0].location.postal_code + '</div>'
+        + '<div class="yelp-img" style="float:right; width:40%;"><img src="' + data.businesses[0].image_url + '">' + '</div>';
 
       google.maps.event.addListener(marker, 'click', function() {
        for (var i = 0; i < markers.length; i++) {
-         markers[i].setIcon('images/blue-dot.png');
+         markers[i].setIcon('images/golf.png');
        }
       this.setIcon('images/golfer.png');
       infowindow.setContent(contentString);
       infowindow.open(map, marker);
+      map.panTo(LatLng);
     });
-
       },
       error: function() {
         // Do stuff on fail
@@ -168,95 +179,46 @@ function nonce_generate() {
 
     markers.push(marker);
     console.log(markers);
-    //map.fitBounds(bounds);
 }
 
-    // listClick = function() {
-    // google.maps.event.trigger(marker, 'click');
-    // }
-// listClick = function() {
-//       for (var i = 0; i < markers.length; i++) {
-//         google.maps.event.trigger(markers[i], 'click');
-//       }
-//     }
+map.fitBounds(bounds);
 
-var i = 0;
-
-
-// function listClick() {
-//   if (self.pin.name === markers.name)
-//     google.maps.event.trigger(markers[0].name, "click")
-// }
 function listClick(id) {
-      google.maps.event.trigger(markers[id], 'click');
+  google.maps.event.trigger(markers[id], 'click');
 }
 
-
+function toggleBounce() {
+  var self = this;
+  if (self.getAnimation() !== null) {
+    self.setAnimation(null);
+  } else {
+    self.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function () {
+      self.setAnimation(null);
+    }, 1400);
+  }
+}
 
 google.maps.event.addListener(map, 'click', function() {
   infowindow.close();
 });
 
-function toggleBounce() {
-	var self = this;
-	if (self.getAnimation() !== null) {
-		self.setAnimation(null);
-	} else {
-		self.setAnimation(google.maps.Animation.BOUNCE);
-		setTimeout(function () {
-			self.setAnimation(null);
-		}, 1400);
-	}
-}
-
-// var pins = [
-
-//         new Pin(map, 'Journey At Pechanga', 33.453159, -117.106527, 1),
-//         new Pin(map, 'Temecula Creek Inn', 33.4676068, -117.1291816, 2),
-//         new Pin(map, 'The Golf Club at Rancho California', 33.562563, -117.145126, 3),
-//         new Pin(map, 'Redhawk Golf Club', 33.468955, -117.091304, 4),
-//         new Pin(map, 'The Legends Golf Club', 33.515210, -117.113069, 5)
-// ];
-
-// var pinZ = [
-// {
-//   "name": "Journey At Pechanga",
-//   "lat": 33.453159,
-//   'lng': -117.106527
-// },
-// {
-//   "name": "Temecula Creek Inn",
-//   "lat": 33.4676068,
-//   'lng': -117.1291816
-// },
-// {
-//   "name": "The Golf Club at Rancho California",
-//   "lat": 33.562563,
-//   "lng": -117.145126
-// },
-// {
-//   "name": "Redhawk Golf Club",
-//   "lat": 33.468955,
-//   "lng": -117.091304
-// },
-// {
-//   "name": "The Legends Golf Club",
-//   "lat": 33.515210,
-//   "lng": -117.113069
-// }
-// ];
-
 var ViewModel = function() {
 	var self = this;
 
-  //infowindow.setContent(createContent(marker.name));
-
 	self.pins = ko.observableArray([
-	        new Pin(map, 'Temeku Hills Golf Club', 33.516145, -117.115446, 0),
-	        new Pin(map, 'Temecula Creek Inn', 33.4676068, -117.1291816, 1),
-	        new Pin(map, 'CrossCreek Golf Club', 33.496457, -117.225794, 2),
-	        new Pin(map, 'The Golf Club at Rancho California', 33.562563, -117.145126, 3),
-	        new Pin(map, 'Redhawk Golf Club', 33.468955, -117.091304, 4)
+          new Pin(map, 'Journey At Pechanga', 33.453157, -117.106526, 0),
+          new Pin(map, 'Temecula Creek Inn', 33.4676068, -117.1291816, 1),
+	        new Pin(map, 'The Golf Club at Rancho California', 33.562563, -117.145126, 2),
+          new Pin(map, 'Redhawk Golf Club', 33.468955, -117.091304, 3),
+          new Pin(map, 'The Legends Golf Club', 33.515210, -117.113069, 4),
+          new Pin(map, 'CrossCreek Golf Club', 33.496457, -117.225794, 5),
+          //new Pin(map, 'Temeku Hills Golf Club', 33.516145, -117.115446, 6),
+          new Pin(map, 'Murrieta Valley Golf Range', 33.556781, -117.220490, 6),
+          new Pin(map, 'Bear Creek Golf Club', 33.582178, -117.262248, 7),
+          new Pin(map, 'Fallbrook Golf Club', 33.342399, -117.191919, 8),
+          new Pin(map, 'Links at Summerly', 33.649294, -117.306694, 9),
+          new Pin(map, 'Diamond Valley Golf Club', 33.666240, -116.958691, 10)
 	]);
 
 	self.query = ko.observable('');
