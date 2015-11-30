@@ -29,7 +29,7 @@ html, body {
 /*Search bar*/
 input {
     /*<div>Icons made by <a href="http://www.flaticon.com/authors/simpleicon" title="SimpleIcon">SimpleIcon</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>*/
-    background-image: url('/images/magnifier12.png');
+    background-image: url('http://jpetersun.github.io/frontend-nanodegree-neighborhood-map/images/magnifier12.png');
     background-size:  18px 18px;
     background-repeat: no-repeat;
     background-position: right 5px bottom 1px;
